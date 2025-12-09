@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,19 @@ Route::middleware('auth:sanctum')->group(function () {
     // Rota padrão do Laravel (opcional)
     Route::get('/user', function (Request $request) {
         return $request->user();
+    });
+
+    // ---------------------
+    //   ROTAS ADMIN
+    // ---------------------
+    Route::middleware('can:is-admin')->group(function () {
+
+        Route::get('/admin/users',           [UserController::class, 'index']);
+        Route::post('/admin/users',          [UserController::class, 'store']);
+        Route::get('/admin/users/{id}',      [UserController::class, 'show']);
+        Route::put('/admin/users/{id}',      [UserController::class, 'update']);
+        Route::delete('/admin/users/{id}',   [UserController::class, 'destroy']);
+
+        Route::post('/admin/users/{id}/reset-password', [UserController::class, 'resetPassword']);
     });
 });
