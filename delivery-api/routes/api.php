@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\ProductTypeController;
 use App\Http\Controllers\Api\Admin\ProductController;
+use App\Http\Controllers\Api\Admin\SettingsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/admin/users/{id}',   [UserController::class, 'destroy']);
 
         Route::post('/admin/users/{id}/reset-password', [UserController::class, 'resetPassword']);
+
+        // SETTINGS...
+        Route::get('/admin/settings',  [SettingsController::class, 'show']);
+        Route::put('/admin/settings',  [SettingsController::class, 'update']);
     });
 
     // ---------------------
