@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Admin\UserController;
+use App\Http\Controllers\Api\Admin\ProductTypeController;
+use App\Http\Controllers\Api\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +47,22 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::post('/admin/users/{id}/reset-password', [UserController::class, 'resetPassword']);
     });
+
+    // ---------------------
+    //   ROTAS DE PRODUTOS (Admin e Caixa podem usar)
+    // ---------------------
+
+    // Tipos de produto (categorias)
+    Route::get('/product-types',        [ProductTypeController::class, 'index']);
+    Route::post('/product-types',       [ProductTypeController::class, 'store']);
+    Route::get('/product-types/{id}',   [ProductTypeController::class, 'show']);
+    Route::put('/product-types/{id}',   [ProductTypeController::class, 'update']);
+    Route::delete('/product-types/{id}',[ProductTypeController::class, 'destroy']);
+
+    // Produtos
+    Route::get('/products',             [ProductController::class, 'index']);
+    Route::post('/products',            [ProductController::class, 'store']);
+    Route::get('/products/{id}',        [ProductController::class, 'show']);
+    Route::put('/products/{id}',        [ProductController::class, 'update']);
+    Route::delete('/products/{id}',     [ProductController::class, 'destroy']);
 });
