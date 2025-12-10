@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Client\MenuController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\ProductTypeController;
 use App\Http\Controllers\Api\Admin\ProductController;
@@ -20,6 +21,9 @@ use App\Http\Controllers\Api\Admin\SettingsController;
 
 //Rota pública — Login
 Route::post('/login', [AuthController::class, 'login']);
+
+// Rota pública — Cardápio do Cliente
+Route::get('/menu', [MenuController::class, 'index']);
 
 
 //Rotas protegidas (somente com token Sanctum)
